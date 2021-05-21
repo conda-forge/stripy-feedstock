@@ -1,17 +1,17 @@
 {% set name = "stripy" %}
-{% set version = "v2.0.2" %}
+{% set version = "2.0.2" %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+  name: {{ name|lower }}
+  version: {{ version }}
 
 source:
-  url: https://github.com/underworldcode/{{ name|lower }}/archive/refs/tags/{{ version }}.tar.gz 
-  sha256: 6e40a36527757f99c5f1bb1220109c8e42281b274fef7fac6da1a8e8d240d67b 
+  url: https://github.com/underworldcode/{{ name|lower }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 6e40a36527757f99c5f1bb1220109c8e42281b274fef7fac6da1a8e8d240d67b
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install . -vv"
+  script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
 
@@ -23,7 +23,7 @@ requirements:
     - python
     - pip
     - numpy
-    
+
   run:
     - python
     - {{ pin_compatible('numpy') }}
@@ -31,7 +31,7 @@ requirements:
 
 test:
   requires:
-    - pytest 
+    - pytest
     - setuptools # for pkg_resources
 
   source_files:
@@ -41,11 +41,11 @@ test:
     - pytest
 
 about:
-  home: "https://github.com/underworldcode/stripy"
+  home: https://github.com/underworldcode/stripy
   license: LGPL-2.0-or-later
   license_family: GPL
   license_file: COPYING.LESSER
-  summary: "Python interface to TRIPACK and STRIPACK fortran code for triangulation/interpolation in Cartesian coordinates and on a sphere"
+  summary: Python interface to TRIPACK and STRIPACK fortran code for triangulation/interpolation in Cartesian coordinates and on a sphere
   doc_url: https://underworldcode.github.io/stripy/2.0.5b2
   dev_url: https://github.com/underworldcode/stripy
 
