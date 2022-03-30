@@ -35,7 +35,7 @@ test:
     - setuptools # for pkg_resources
 
   source_files:
-    - tests
+    - stripy/tests
 
   commands:
     - pytest
