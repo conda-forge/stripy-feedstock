@@ -1,5 +1,5 @@
 {% set name = "stripy" %}
-{% set version = "2.1.2" %}
+{% set version = "2.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/underworldcode/{{ name|lower }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: a16b9de09abfbaebfa4cd96090ff7d2224391204fe1e89460bb0485fcc2ea4a2
+  sha256: 956aa9bea6b71326185e66cbf094d1e422b8a5e899836fc68c07e26e9377fd6e
 
 build:
-  number: 3
+  number: 0
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
