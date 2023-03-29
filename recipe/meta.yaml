@@ -10,14 +10,13 @@ source:
   sha256: 956aa9bea6b71326185e66cbf094d1e422b8a5e899836fc68c07e26e9377fd6e
 
 build:
-  number: 1
+  number: 2
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
 
   build:
     - python
-    - cross-python_{{ target_platform }}
     - {{ compiler('fortran') }}
     - {{ compiler('c') }}
 
