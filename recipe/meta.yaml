@@ -21,7 +21,6 @@ requirements:
     - numpy                                  # [build_platform != target_platform]
     - mesonpy
     - {{ compiler('fortran') }}
-    - {{ compiler('c') }}
 
   host:
     - python
