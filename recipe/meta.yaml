@@ -10,7 +10,7 @@ source:
   sha256: afc10284f77f901b00fbee4538e1c6541ae4be1db690e474a7bf9249aecc76b2
 
 build:
-  number: 1
+  number: 2
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
@@ -20,12 +20,15 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
     - meson-python
+    - ninja
     - {{ compiler('fortran') }}
 
   host:
     - python
     - pip
     - numpy
+    - meson-python
+    - ninja
 
   run:
     - python
