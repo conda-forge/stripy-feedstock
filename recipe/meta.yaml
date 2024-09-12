@@ -1,16 +1,16 @@
 {% set name = "stripy" %}
-{% set version = "2.2" %}
+{% set version = "2.3.3" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/underworldcode/{{ name|lower }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 956aa9bea6b71326185e66cbf094d1e422b8a5e899836fc68c07e26e9377fd6e
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/stripy-{{ version }}.tar.gz
+  sha256: afc10284f77f901b00fbee4538e1c6541ae4be1db690e474a7bf9249aecc76b2
 
 build:
-  number: 0
+  number: 1
   script:
     # Cross-compilation stuff vendored from numpy-feedstock
     # necessary for cross-compilation to point to the right env
@@ -41,7 +41,6 @@ requirements:
   run:
     - python
     - {{ pin_compatible('numpy') }}
-    - scipy >=1.0.0
 
 test:
   requires:
