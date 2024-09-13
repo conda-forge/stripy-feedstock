@@ -28,6 +28,7 @@ requirements:
     - numpy                                  # [build_platform != target_platform]
     - meson-python
     - ninja
+    - libpgmath                               # [win]
     - {{ compiler('fortran') }}
     - {{ stdlib("c") }}
 
