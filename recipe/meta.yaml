@@ -10,7 +10,7 @@ source:
   sha256: afc10284f77f901b00fbee4538e1c6541ae4be1db690e474a7bf9249aecc76b2
 
 build:
-  number: 2
+  number: 3
   script:
     # Cross-compilation stuff vendored from numpy-feedstock
     # necessary for cross-compilation to point to the right env
@@ -28,7 +28,6 @@ requirements:
     - numpy                                  # [build_platform != target_platform]
     - meson-python
     - ninja
-    - libpgmath                               # [win]
     - {{ compiler('fortran') }}
     - {{ stdlib("c") }}
 
@@ -38,6 +37,7 @@ requirements:
     - numpy
     - meson-python
     - ninja
+    - libpgmath                               # [win]
 
   run:
     - python
