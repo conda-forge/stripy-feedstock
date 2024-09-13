@@ -1,17 +1,24 @@
 {% set name = "stripy" %}
-{% set version = "2.2" %}
+{% set version = "2.3.3" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://github.com/underworldcode/{{ name|lower }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 956aa9bea6b71326185e66cbf094d1e422b8a5e899836fc68c07e26e9377fd6e
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/stripy-{{ version }}.tar.gz
+  sha256: afc10284f77f901b00fbee4538e1c6541ae4be1db690e474a7bf9249aecc76b2
 
 build:
   number: 4
-  script: {{ PYTHON }} -m pip install . -vv
+  script:
+    # Cross-compilation stuff vendored from numpy-feedstock
+    # necessary for cross-compilation to point to the right env
+    - export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig                                    # [build_platform != target_platform]
+    - echo "python = '${PREFIX}/bin/python'" >> ${CONDA_PREFIX}/meson_cross_file.txt  # [build_platform != target_platform]
+    - MESON_ARGS_REDUCED="$(echo $MESON_ARGS | sed 's/--buildtype release //g')"  # [unix]
+    - {{ PYTHON }} -m pip install -vv --no-deps --ignore-installed . -Csetup-args=${MESON_ARGS_REDUCED// / -Csetup-args=}  # [unix]
+    - {{ PYTHON }} -m pip install -vv --no-deps --ignore-installed .  # [not unix]
 
 requirements:
 
@@ -19,22 +26,27 @@ requirements:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - numpy                                  # [build_platform != target_platform]
+    - meson-python
+    - ninja
     - {{ compiler('fortran') }}
+    - {{ stdlib("c") }}
 
   host:
     - python
     - pip
     - numpy
+    - meson-python
+    - ninja
+    - libpgmath                               # [win]
 
   run:
     - python
-    - {{ pin_compatible('numpy') }}
-    - scipy >=1.0.0
 
 test:
   requires:
     - pytest
     - setuptools # for pkg_resources
+    - numpy
 
   source_files:
     - stripy/tests
